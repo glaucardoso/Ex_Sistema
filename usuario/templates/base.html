@@ -9,6 +9,37 @@
 <body>
 
 {% block body %}
+{% if user.is_authenticated %}
+    <p>
+        Olá {{ user.username }} seja bem vindo, o que deseja fazer hoje? 
+        <span><a href="{% url 'logout' %}">Sair</a></span>
+    </p>
+{% endif %}
+    <section class="container">
+        <h1>Cadastro de Usuário</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+
+            <button type="submit" class="btn btn-primary"> Cadastrar Usuário</button>
+        </form>
+    </section>
+        <section class="container">
+            {% if msg %}
+            <h3>{{msg}}</h3>
+            {% endif %}
+        {% if usuarios %}
+        {% for usuario in usuarios %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Nome: {{usuario.nome}}</h5>
+                <p class="card-text">Idade: {{usuario.idade}}</p>
+                <a href="detail/{{pessoas.id}}"><button class="btn btn-primary">Detalhes do Usuário</button></a>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </section>
 
 
 {% endblock %}

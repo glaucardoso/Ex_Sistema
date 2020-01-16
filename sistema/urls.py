@@ -17,5 +17,11 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
+    path('', sistema),
+    path('dono/', include('dono.urls')),
+    path('detail/<int:id>', detail),
+    path('delete/<int:id>', delete),
+    path('update/<int:id>', update),
     path('admin/', admin.site.urls),
-]
+    path('account/', include('django.contrib.auth.urls'))
+
